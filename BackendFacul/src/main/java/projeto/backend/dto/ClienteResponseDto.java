@@ -9,7 +9,7 @@ public class ClienteResponseDto {
 
     private final Integer id;
     private final String nome;
-    private final Integer cpf;
+    private final String cpf;
     private final String email;
     private final String perfil;
     private final LocalDate dataCriacao;

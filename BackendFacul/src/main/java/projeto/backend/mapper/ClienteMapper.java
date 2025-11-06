@@ -14,13 +14,11 @@ import java.util.List;
 public interface ClienteMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "perfilEnum", expression = "java(PerfilEnum.CLIENTE)")
-    @Mapping(target = "dataCriacao", expression = "java(LocalDate.now())")
-    Cliente convertToEntity(ClienteRequestDto requisicao);
-
-    ClienteResponseDto convertToResponse(Cliente cliente);
-
-    List<ClienteResponseDto> convertToResponseList(List<Cliente> listaClientes);
-
+    @Mapping(target = "perfilEnum", expression = "java(projeto.backend.enums.PerfilEnum.CLIENTE)")
+    @Mapping(target = "dataCriacao", expression = "java(java.time.LocalDate.now())")
     Cliente toEntity(ClienteRequestDto dto);
+
+    ClienteResponseDto toResponseDto(Cliente cliente);
+
+    List<ClienteResponseDto> toResponseDtoList(List<Cliente> clientes);
 }

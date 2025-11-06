@@ -1,5 +1,6 @@
 package projeto.backend.mapper;
 
+import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import projeto.backend.dto.ChamadoRequestDto;
@@ -21,4 +22,6 @@ public interface ChamadoMapper {
     ChamadoResponseDto toResponseDto(Chamado chamado);
 
     List<ChamadoResponseDto> toResponseDtoList(List<Chamado> chamados);
+
+    Chamado toEntity(ChamadoRequestDto dto, @NotNull(message = "O identificador do cliente é obrigatório.") Integer cliente, @NotNull(message = "O identificador do técnico é obrigatório.") Integer tecnico);
 }

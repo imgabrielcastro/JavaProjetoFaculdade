@@ -12,8 +12,7 @@ public class ClienteRequestDto {
     @NotBlank(message = "Informe o nome completo do cliente.")
     private final String nome;
 
-    @NotBlank(message = "É necessário informar o CPF.")
-    private final Integer cpf;
+    private final String cpf;
 
     @Email(message = "Informe um endereço de e-mail válido.")
     @NotBlank(message = "O e-mail não pode ficar em branco.")
@@ -22,7 +21,7 @@ public class ClienteRequestDto {
     @NotBlank(message = "A senha deve ser preenchida.")
     private final String senha;
 
-    public ClienteRequestDto(String nome, Integer cpf, String email, String senha) {
+    public ClienteRequestDto(String nome, String cpf, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;

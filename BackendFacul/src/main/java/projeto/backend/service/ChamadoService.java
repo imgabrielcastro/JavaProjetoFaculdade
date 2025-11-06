@@ -25,7 +25,7 @@ public class ChamadoService {
     }
 
     public void deletarChamado(Chamado chamado) {
-        if (chamado.getStatus().getCodigo() != 2) { // 2 = ENCERRADO
+        if (chamado.getStatus().getCodigo() != 2) {
             throw new RuntimeException("Não é possível excluir chamados em aberto");
         }
         chamados.remove(chamado);

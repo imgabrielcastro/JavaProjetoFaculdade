@@ -1,31 +1,23 @@
 package projeto.backend.enums;
 
-import lombok.Getter;
-
-@Getter
 public enum StatusEnum {
-
-    ABERTO(0, "Em aberto"),
-    EM_ANDAMENTO(1, "Em andamento"),
-    FINALIZADO(2, "Concluído");
+    ABERTO(0, "Aberto"),
+    ANDAMENTO(1, "Em andamento"),
+    ENCERRADO(2, "Encerrado");
 
     private final int codigo;
-    private final String rotulo;
+    private final String descricao;
 
-    StatusEnum(int codigo, String rotulo) {
+    StatusEnum(int codigo, String descricao) {
         this.codigo = codigo;
-        this.rotulo = rotulo;
+        this.descricao = descricao;
     }
 
-    public static StatusEnum fromCodigo(Integer codigo) {
-        if (codigo == null) return null;
+    public int getCodigo() {
+        return codigo;
+    }
 
-        for (StatusEnum valor : values()) {
-            if (valor.codigo == codigo) {
-                return valor;
-            }
-        }
-
-        throw new IllegalArgumentException("Código de status inválido: " + codigo);
+    public String getDescricao() {
+        return descricao;
     }
 }

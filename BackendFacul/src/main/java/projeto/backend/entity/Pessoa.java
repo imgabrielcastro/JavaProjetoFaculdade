@@ -28,7 +28,7 @@ public abstract class Pessoa {
     protected String nome;
 
     @NotNull
-    protected Integer cpf;
+    protected String cpf;
 
     @NotNull
     protected String email;
