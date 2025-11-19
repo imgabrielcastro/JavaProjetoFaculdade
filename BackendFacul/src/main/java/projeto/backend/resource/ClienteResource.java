@@ -40,4 +40,22 @@ public class ClienteResource {
         List<ClienteResponseDto> dtos = mapper.toResponseDtoList(service.listarClientes());
         return ResponseEntity.ok(dtos);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um cliente")
+    public ResponseEntity<ClienteResponseDto> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody ClienteRequestDto dto) {
+
+        Cliente atualizado = service.atualizarCliente(id, dto);
+        return ResponseEntity.ok(mapper.toResponseDto(atualizado));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta um cliente")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        service.deletarCliente(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

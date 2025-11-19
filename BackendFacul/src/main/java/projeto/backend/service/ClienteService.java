@@ -18,7 +18,34 @@ public class ClienteService {
         this.mapper = mapper;
     }
 
+    public Cliente atualizarCliente(Integer id, ClienteRequestDto dto) {
+
+        Cliente cliente = clientes.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        cliente.setNome(dto.getNome());
+        cliente.setCpf(dto.getCpf());
+        cliente.setEmail(dto.getEmail());
+        cliente.setSenha(dto.getSenha());
+
+        return cliente;
+    }
+
+    public void deletarCliente(Integer id) {
+
+        Cliente cliente = clientes.stream()
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        clientes.remove(cliente);
+    }
+
+
     public Cliente criarCliente(ClienteRequestDto dto) {
+
         for (Cliente c : clientes) {
             if (c.getCpf().equals(dto.getCpf())) {
                 throw new RuntimeException("CPF já cadastrado");
@@ -27,10 +54,18 @@ public class ClienteService {
                 throw new RuntimeException("Email já cadastrado");
             }
         }
+
         Cliente cliente = mapper.toEntity(dto);
+
+        if (cliente.getId() == null) {
+            cliente.setId(clientes.size() + 1);
+        }
+
         clientes.add(cliente);
         return cliente;
     }
+
+
 
     public List<Cliente> listarClientes() {
         return clientes;

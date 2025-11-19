@@ -40,4 +40,22 @@ public class TecnicoResource {
         List<TecnicoResponseDto> dtos = mapper.toResponseDtoList(service.listarTecnicos());
         return ResponseEntity.ok(dtos);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um técnico")
+    public ResponseEntity<TecnicoResponseDto> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody TecnicoRequestDto dto) {
+
+        Tecnico atualizado = service.atualizarTecnico(id, dto);
+        return ResponseEntity.ok(mapper.toResponseDto(atualizado));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta um técnico")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        service.deletarTecnico(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

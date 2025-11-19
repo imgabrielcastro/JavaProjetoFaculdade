@@ -27,6 +27,32 @@ public class TecnicoService {
         this.validator = factory.getValidator();
     }
 
+    public Tecnico atualizarTecnico(Integer id, TecnicoRequestDto dto) {
+
+        Tecnico tecnico = tecnicos.stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Técnico não encontrado"));
+
+        tecnico.setNome(dto.getNome());
+        tecnico.setCpf(dto.getCpf().toString());
+        tecnico.setEmail(dto.getEmail());
+        tecnico.setSenha(dto.getSenha());
+
+        return tecnico;
+    }
+
+    public void deletarTecnico(Integer id) {
+        Tecnico tecnico = tecnicos.stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Técnico não encontrado"));
+
+        tecnicos.remove(tecnico);
+    }
+
+
+
     public Tecnico criarTecnico(TecnicoRequestDto dto) {
         Set<ConstraintViolation<TecnicoRequestDto>> violations = validator.validate(dto);
         if (!violations.isEmpty()) {
@@ -47,6 +73,8 @@ public class TecnicoService {
         }
 
         Tecnico tecnico = mapper.toEntity(dto);
+        tecnico.setId(tecnicos.size() + 1);
+
         tecnicos.add(tecnico);
         return tecnico;
     }

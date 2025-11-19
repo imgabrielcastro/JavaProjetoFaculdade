@@ -40,4 +40,21 @@ public class ChamadoResource {
         List<ChamadoResponseDto> dtos = mapper.toResponseDtoList(service.listarChamados());
         return ResponseEntity.ok(dtos);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um chamado")
+    public ResponseEntity<ChamadoResponseDto> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody ChamadoRequestDto dto) {
+
+        Chamado atualizado = service.atualizarChamado(id, dto);
+        return ResponseEntity.ok(mapper.toResponseDto(atualizado));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta um chamado (somente se ENCERRADO)")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        service.deletarChamado(id);
+        return ResponseEntity.noContent().build();
+    }
 }

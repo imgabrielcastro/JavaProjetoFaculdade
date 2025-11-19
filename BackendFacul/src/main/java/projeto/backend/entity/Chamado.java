@@ -32,6 +32,14 @@ public class Chamado {
     @NotNull
     private StatusEnum status;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
+    private Tecnico tecnico;
+
     @NotNull
     private LocalDate dataAbertura = LocalDate.now();
 
